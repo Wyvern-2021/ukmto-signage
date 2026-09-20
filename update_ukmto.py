@@ -185,8 +185,7 @@ file,
 indent=2,
 ensure_ascii=False
 )
-file.write("
-")
+
 print(
 "Successfully wrote",
 len(incidents),
