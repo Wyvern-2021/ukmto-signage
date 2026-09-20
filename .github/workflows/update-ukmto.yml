@@ -1,9 +1,9 @@
-name: Update UKMTO incidents
+- name: Update UKMTO incidents
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "/15 * * * *"
+    - cron: "*/15 * * * *"
     
 permissions:
   contents: write
