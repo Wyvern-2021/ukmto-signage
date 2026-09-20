@@ -7,117 +7,114 @@ from bs4 import BeautifulSoup
 from pypdf import PdfReader
 OUTPUT_FILE = "incidents.json"
 INDEX_URL = "https://mscio.eu/folder/documents/UKMTO%20Warnings/"
-HEADERS = {
-"User-Agent": "Mozilla/5.0"
-}
-
-def clean(text):
-    return re.sub(r"\s+", " ", text or "").strip()
-
-def get_links():
-r = requests.get(INDEX_URL, headers=HEADERS, timeout=30)
-r.raise_for_status()
-soup = BeautifulSoup(r.text, "html.parser")
-results = []
-for a in soup.find_all("a", href=True):
-name = clean(a.get_text())
-url = a["href"].strip()
-if "UKMTO" not in name.upper():
+HEADERS = {"User-Agent": "Mozilla/5.0"}
+print("Getting UKMTO warning index...")
+response = requests.get(INDEX_URL, headers=HEADERS, timeout=30)
+response.raise_for_status()
+soup = BeautifulSoup(response.text, "html.parser")
+links = [
+(
+a.get_text(" ", strip=True),
+a["href"].strip() if a["href"].startswith("http") else "https://mscio.eu" + a["href"]
+)
+for a in soup.find_all("a", href=True)
+if "UKMTO" in a.get_text(" ", strip=True).upper()
+and ".pdf" in a["href"].lower()
+]
+print("Found", len(links), "PDF links.")
+if not links:
+print("No warning documents found.")
+print("Keeping existing incidents.json.")
+else:
+incidents = []
+for name, url in links[:30]:
+print("Reading:", name)
+try:
+pdf_response = requests.get(
+url,
+headers=HEADERS,
+timeout=30
+)
+pdf_response.raise_for_status()
+reader = PdfReader(
+io.BytesIO(pdf_response.content)
+)
+text = " ".join(
+page.extract_text() or ""
+for page in reader.pages
+)
+text = re.sub(
+r"\s+",
+" ",
+text
+).strip()
+warning_match = re.search(
+r"(\d{3}-\d{2})",
+text
+)
+if not warning_match:
 continue
-if ".pdf" not in url.lower():
-continue
-if url.startswith("/"):
-url = "https://mscio.eu" + url
-results.append((name, url))
-return results
-
-def get_pdf(url):
-r = requests.get(url, headers=HEADERS, timeout=30)
-r.raise_for_status()
-reader = PdfReader(io.BytesIO(r.content))
-text = ""
-for page in reader.pages:
-text += " " + (page.extract_text() or "")
-return clean(text)
-
-def parse(text):
-m = re.search(r"(\d{3}-\d{2})", text)
-if not m:
-return None
-number = m.group(1)
-m = re.search(
+number = warning_match.group(1)
+date_match = re.search(
 r"Report Date:\s(\d{1,2}\s+[A-Za-z]{3}\s+\d{2,4})",
 text,
-re.I
+re.IGNORECASE
 )
 date = ""
-if m:
-for fmt in ("%d %b %Y", "%d %b %y"):
+if date_match:
+for date_format in ("%d %b %Y", "%d %b %y"):
 try:
-date = datetime.strptime(m.group(1), fmt).strftime(
-"%d %b %Y"
-).upper()
+date = datetime.strptime(
+date_match.group(1),
+date_format
+).strftime("%d %b %Y").upper()
 break
 except ValueError:
 pass
-m = re.search(
+type_match = re.search(
 r"\b(ATTACK|BOARDING|HIJACK|SUSPICIOUS ACTIVITY|UAV|DRONE|MISSILE)\b",
 text,
-re.I
+re.IGNORECASE
 )
-incident_type = m.group(1).upper() if m else "MARITIME SECURITY"
-m = re.search(
+incident_type = (
+type_match.group(1).upper()
+if type_match
+else "MARITIME SECURITY"
+)
+description_match = re.search(
 r"UKMTO has received.",
 text,
-re.I
+re.IGNORECASE
 )
-description = clean(m.group(0)) if m else text
+description = (
+description_match.group(0).strip()
+if description_match
+else text
+)
 if len(description) > 1500:
 description = description[:1500] + "..."
-location = "UKMTO AREA OF OPERATIONS"
-m = re.search(
+location_match = re.search(
 r"incident within the ([^.]+)",
 text,
-re.I
+re.IGNORECASE
 )
-if m:
-location = clean(m.group(1))
-return {
+location = (
+location_match.group(1).strip()
+if location_match
+else "UKMTO AREA OF OPERATIONS"
+)
+incidents.append(
+{
 "number": "UKMTO WARNING " + number,
 "date": date,
 "type": incident_type,
 "location": location,
 "description": description
 }
-
-def main():
-print("Getting UKMTO warning index...")
-try:
-links = get_links()
-except Exception as e:
-print("ERROR:", e)
-print("Keeping existing incidents.json.")
-return
-print("Found", len(links), "PDF links.")
-if not links:
-print("No warning documents found.")
-print("Keeping existing incidents.json.")
-return
-incidents = []
-for name, url in links[:30]:
-try:
-print("Reading:", name)
-text = get_pdf(url)
-incident = parse(text)
-if incident:
-incidents.append(incident)
-except Exception as e:
+)
+except Exception as error:
 print("Could not process:", name)
-print(e)
-if not incidents:
-print("No valid warnings extracted.")
-print("Keeping existing incidents.json.")
-return
+print(error)
 unique = {}
 for incident in incidents:
 if incident["number"] not in unique:
@@ -131,11 +128,28 @@ item["date"],
 )
 except ValueError:
 return datetime.min
-incidents.sort(key=sort_key, reverse=True)
+incidents.sort(
+key=sort_key,
+reverse=True
+)
 incidents = incidents[:20]
-with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-json.dump(incidents, f, indent=2, ensure_ascii=False)
-print("Successfully wrote", len(incidents), "warnings.")
-
-if __name__ == "__main__":
-    main()
+if incidents:
+open(
+OUTPUT_FILE,
+"w",
+encoding="utf-8"
+).write(
+json.dumps(
+incidents,
+indent=2,
+ensure_ascii=False
+)
+)
+print(
+"Successfully wrote",
+len(incidents),
+"UKMTO warnings."
+)
+else:
+print("No valid warnings extracted.")
+print("Keeping existing incidents.json.")
