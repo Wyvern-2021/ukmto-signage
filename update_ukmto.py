@@ -9,27 +9,32 @@ OUTPUT_FILE = "incidents.json"
 INDEX_URL = "https://mscio.eu/folder/documents/UKMTO%20Warnings/"
 HEADERS = {"User-Agent": "Mozilla/5.0"}
 print("Getting UKMTO warning index...")
-response = requests.get(INDEX_URL, headers=HEADERS, timeout=30)
-response.raise_for_status()
-soup = BeautifulSoup(response.text, "html.parser")
-links = [
-(
-a.get_text(" ", strip=True),
-a["href"].strip() if a["href"].startswith("http") else "https://mscio.eu" + a["href"]
+response = requests.get(
+INDEX_URL,
+headers=HEADERS,
+timeout=30
 )
-for a in soup.find_all("a", href=True)
-if "UKMTO" in a.get_text(" ", strip=True).upper()
-and ".pdf" in a["href"].lower()
-]
+response.raise_for_status()
+soup = BeautifulSoup(
+response.text,
+"html.parser"
+)
+links = []
+for a in soup.find_all("a", href=True):
+name = a.get_text(" ", strip=True)
+url = a["href"].strip()
+if "UKMTO" in name.upper() and ".pdf" in url.lower():
+if url.startswith("/"):
+url = "https://mscio.eu" + url
+links.append((name, url))
 print("Found", len(links), "PDF links.")
-if not links:
+if len(links) == 0:
 print("No warning documents found.")
 print("Keeping existing incidents.json.")
 else:
 incidents = []
 for name, url in links[:30]:
 print("Reading:", name)
-try:
 pdf_response = requests.get(
 url,
 headers=HEADERS,
@@ -39,10 +44,11 @@ pdf_response.raise_for_status()
 reader = PdfReader(
 io.BytesIO(pdf_response.content)
 )
-text = " ".join(
-page.extract_text() or ""
-for page in reader.pages
-)
+text = ""
+for page in reader.pages:
+page_text = page.extract_text()
+if page_text:
+text = text + " " + page_text
 text = re.sub(
 r"\s+",
 " ",
@@ -53,56 +59,56 @@ r"(\d{3}-\d{2})",
 text
 )
 if not warning_match:
+print("No warning number found.")
 continue
 number = warning_match.group(1)
+date = ""
 date_match = re.search(
 r"Report Date:\s(\d{1,2}\s+[A-Za-z]{3}\s+\d{2,4})",
 text,
 re.IGNORECASE
 )
-date = ""
 if date_match:
-for date_format in ("%d %b %Y", "%d %b %y"):
+raw_date = date_match.group(1)
 try:
 date = datetime.strptime(
-date_match.group(1),
-date_format
+raw_date,
+"%d %b %y"
 ).strftime("%d %b %Y").upper()
-break
 except ValueError:
-pass
+try:
+date = datetime.strptime(
+raw_date,
+"%d %b %Y"
+).strftime("%d %b %Y").upper()
+except ValueError:
+date = raw_date.upper()
+incident_type = "MARITIME SECURITY"
 type_match = re.search(
 r"\b(ATTACK|BOARDING|HIJACK|SUSPICIOUS ACTIVITY|UAV|DRONE|MISSILE)\b",
 text,
 re.IGNORECASE
 )
-incident_type = (
-type_match.group(1).upper()
-if type_match
-else "MARITIME SECURITY"
-)
+if type_match:
+incident_type = type_match.group(1).upper()
+description = text
 description_match = re.search(
 r"UKMTO has received.",
 text,
 re.IGNORECASE
 )
-description = (
-description_match.group(0).strip()
-if description_match
-else text
-)
+if description_match:
+description = description_match.group(0).strip()
 if len(description) > 1500:
 description = description[:1500] + "..."
+location = "UKMTO AREA OF OPERATIONS"
 location_match = re.search(
 r"incident within the ([^.]+)",
 text,
 re.IGNORECASE
 )
-location = (
-location_match.group(1).strip()
-if location_match
-else "UKMTO AREA OF OPERATIONS"
-)
+if location_match:
+location = location_match.group(1).strip()
 incidents.append(
 {
 "number": "UKMTO WARNING " + number,
@@ -112,38 +118,28 @@ incidents.append(
 "description": description
 }
 )
-except Exception as error:
-print("Could not process:", name)
-print(error)
 unique = {}
 for incident in incidents:
-if incident["number"] not in unique:
-unique[incident["number"]] = incident
+number = incident["number"]
+if number not in unique:
+unique[number] = incident
 incidents = list(unique.values())
-def sort_key(item):
-try:
-return datetime.strptime(
-item["date"],
-"%d %b %Y"
-)
-except ValueError:
-return datetime.min
+if len(incidents) > 0:
 incidents.sort(
-key=sort_key,
+key=lambda item: item["date"],
 reverse=True
 )
 incidents = incidents[:20]
-if incidents:
-open(
+with open(
 OUTPUT_FILE,
 "w",
 encoding="utf-8"
-).write(
-json.dumps(
+) as file:
+json.dump(
 incidents,
+file,
 indent=2,
 ensure_ascii=False
-)
 )
 print(
 "Successfully wrote",
