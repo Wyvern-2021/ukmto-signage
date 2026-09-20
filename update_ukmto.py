@@ -3,196 +3,220 @@ import json
 import re
 from datetime import datetime
 from pathlib import Path
+
 import requests
 from bs4 import BeautifulSoup
 from pypdf import PdfReader
 
+
 OUTPUT_FILE = Path("incidents.json")
-UKMTO_RECENT_URL = "https://www.ukmto.org/recent-incidents"
+UKMTO_URL = "https://www.ukmto.org/recent-incidents"
+
 HEADERS = {
-"User-Agent": (
-"Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-"AppleWebKit/537.36 (KHTML, like Gecko) "
-"Chrome/140.0 Safari/537.36"
-)
+    "User-Agent": "Mozilla/5.0 (compatible; UKMTO-Signage/1.0)"
 }
+
 
 def clean(text):
-return re.sub(r"\s+", " ", text or "").strip()
+    return re.sub(r"\s+", " ", text or "").strip()
 
-def load_existing():
-if not OUTPUT_FILE.exists():
-return []
-try:
-with OUTPUT_FILE.open("r", encoding="utf-8") as f:
-data = json.load(f)
-return data if isinstance(data, list) else []
-except Exception as exc:
-print(f"Could not read existing incidents.json: {exc}")
-return []
 
-def download_pdf(url):
-response = requests.get(
-url,
-headers=HEADERS,
-timeout=30,
-)
-response.raise_for_status()
-content_type = response.headers.get("content-type", "").lower()
-if "pdf" not in content_type and not response.content.startswith(b"%PDF"):
-raise ValueError("Response was not a PDF")
-return response.content
+def get_pdf_links():
+    response = requests.get(
+        UKMTO_URL,
+        headers=HEADERS,
+        timeout=30
+    )
 
-def parse_warning_pdf(pdf_bytes, url):
-reader = PdfReader(io.BytesIO(pdf_bytes))
-pages = []
-for page in reader.pages:
-try:
-text = page.extract_text() or ""
-pages.append(text)
-except Exception:
-pass
-text = clean("\n".join(pages))
-if not text:
-return None
-warning_match = re.search(
-r"(\d{3}-\d{2})\s-\s([A-Z][A-Z ]+)",
-text,
-re.IGNORECASE,
-)
-if not warning_match:
-return None
-number = warning_match.group(1)
-incident_type = clean(warning_match.group(2)).upper()
-date_match = re.search(
-r"Report Date:\s(\d{1,2}\s+[A-Za-z]{3}\s+\d{4})",
-text,
-re.IGNORECASE,
-)
-if not date_match:
-return None
-raw_date = date_match.group(1)
-try:
-date_obj = datetime.strptime(raw_date, "%d %b %Y")
-display_date = date_obj.strftime("%d %b %Y").upper()
-except ValueError:
-display_date = raw_date.upper()
-location = ""
-location_patterns = [
-r"incident\s+[^.]{0,150}?\b(?:of|near|off|south of|north of|east of|west of)\s+([^.
-]+)",
-r"^\s([A-Z][A-Za-z .'-]+,\s[A-Z][A-Za-z .'-]+)\s$",
-]
-for pattern in location_patterns:
-match = re.search(
-pattern,
-text,
-re.IGNORECASE | re.MULTILINE,
-)
-if match:
-candidate = clean(match.group(1))
-if 3 <= len(candidate) <= 100:
-location = candidate
-break
-description_match = re.search(
-r"(UKMTO has received.?)(?:Vessels are advised|watchkeepers@ukmto.org|UKMTO UK Maritime)",
-text,
-re.IGNORECASE | re.DOTALL,
-)
-if description_match:
-description = clean(description_match.group(1))
-else:
-description = text
-if len(description) > 1500:
-description = description[:1497].rstrip() + "..."
-return {
-"number": f"UKMTO WARNING {number}",
-"date": display_date,
-"type": incident_type,
-"location": location or "UKMTO AREA OF OPERATIONS",
-"description": description,
-"_url": url,
-}
+    response.raise_for_status()
 
-def find_pdf_links():
-response = requests.get(
-UKMTO_RECENT_URL,
-headers=HEADERS,
-timeout=30,
-)
-response.raise_for_status()
-soup = BeautifulSoup(response.text, "html.parser")
-links = set()
-for link in soup.find_all("a", href=True):
-href = link["href"].strip()
-if ".pdf" not in href.lower():
-continue
-if "ukmto.org" not in href:
-if href.startswith("/"):
-href = "https://www.ukmto.org" + href
-else:
-continue
-links.add(href)
-return sorted(links)
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    links = set()
+
+    for link in soup.find_all("a", href=True):
+        href = link["href"].strip()
+
+        if ".pdf" not in href.lower():
+            continue
+
+        if href.startswith("/"):
+            href = "https://www.ukmto.org" + href
+
+        if "ukmto.org" in href:
+            links.add(href)
+
+    return sorted(links)
+
+
+def read_pdf(url):
+    response = requests.get(
+        url,
+        headers=HEADERS,
+        timeout=30
+    )
+
+    response.raise_for_status()
+
+    reader = PdfReader(io.BytesIO(response.content))
+
+    pages = []
+
+    for page in reader.pages:
+        page_text = page.extract_text()
+
+        if page_text:
+            pages.append(page_text)
+
+    return clean(" ".join(pages))
+
+
+def parse_warning(text):
+    warning = re.search(
+        r"(\d{3}-\d{2})",
+        text
+    )
+
+    if not warning:
+        return None
+
+    number = warning.group(1)
+
+    date_match = re.search(
+        r"Report Date:\s*(\d{1,2}\s+[A-Za-z]{3}\s+\d{4})",
+        text,
+        re.IGNORECASE
+    )
+
+    if date_match:
+        raw_date = date_match.group(1)
+
+        try:
+            date = datetime.strptime(
+                raw_date,
+                "%d %b %Y"
+            ).strftime("%d %b %Y").upper()
+        except ValueError:
+            date = raw_date.upper()
+    else:
+        date = ""
+
+    type_match = re.search(
+        r"(ATTACK|SUSPICIOUS ACTIVITY|BOARDING|HIJACK|MISSILE|UAV|DRONE)",
+        text,
+        re.IGNORECASE
+    )
+
+    if type_match:
+        incident_type = type_match.group(1).upper()
+    else:
+        incident_type = "MARITIME SECURITY"
+
+    description_match = re.search(
+        r"UKMTO has received(.+)",
+        text,
+        re.IGNORECASE
+    )
+
+    if description_match:
+        description = clean(
+            "UKMTO has received " + description_match.group(1)
+        )
+    else:
+        description = text
+
+    if len(description) > 1500:
+        description = description[:1500] + "..."
+
+    return {
+        "number": "UKMTO WARNING " + number,
+        "date": date,
+        "type": incident_type,
+        "location": "UKMTO AREA OF OPERATIONS",
+        "description": description
+    }
+
 
 def main():
-print("Retrieving UKMTO warning documents...")
-try:
-pdf_links = find_pdf_links()
-except Exception as exc:
-print(f"ERROR: Could not retrieve UKMTO warning links: {exc}")
-print("Keeping existing incidents.json.")
-return
-print(f"Found {len(pdf_links)} UKMTO PDF links.")
-if not pdf_links:
-print(
-"UKMTO did not expose warning PDF links in the "
-"automated page response."
-)
-print("Keeping existing incidents.json.")
-return
-incidents = []
-for url in pdf_links:
-try:
-pdf = download_pdf(url)
-incident = parse_warning_pdf(pdf, url)
-if incident:
-incidents.append(incident)
-except Exception as exc:
-print(f"Skipping {url}: {exc}")
-if not incidents:
-print("No valid UKMTO warnings could be extracted.")
-print("Keeping existing incidents.json.")
-return
-def sort_key(item):
-try:
-return datetime.strptime(
-item["date"],
-"%d %b %Y",
-)
-except Exception:
-return datetime.min
-incidents.sort(key=sort_key, reverse=True)
-unique = {}
-for incident in incidents:
-unique[incident["number"]] = incident
-incidents = list(unique.values())
-incidents = incidents[:20]
-for incident in incidents:
-incident.pop("_url", None)
-with OUTPUT_FILE.open("w", encoding="utf-8") as f:
-json.dump(
-incidents,
-f,
-indent=2,
-ensure_ascii=False,
-)
-f.write("
-")
-print(
-f"Successfully wrote {len(incidents)} UKMTO warnings "
-f"to {OUTPUT_FILE}"
-)
+    print("Retrieving UKMTO warning documents...")
+
+    try:
+        links = get_pdf_links()
+    except Exception as error:
+        print("ERROR retrieving UKMTO page:")
+        print(error)
+        print("Keeping existing incidents.json.")
+        return
+
+    print("Found", len(links), "PDF links.")
+
+    if not links:
+        print("No UKMTO PDF links were found.")
+        print("Keeping existing incidents.json.")
+        return
+
+    incidents = []
+
+    for link in links:
+        try:
+            print("Reading:", link)
+
+            text = read_pdf(link)
+            incident = parse_warning(text)
+
+            if incident:
+                incidents.append(incident)
+
+        except Exception as error:
+            print("Could not process", link)
+            print(error)
+
+    if not incidents:
+        print("No valid UKMTO warnings were extracted.")
+        print("Keeping existing incidents.json.")
+        return
+
+    unique = {}
+
+    for incident in incidents:
+        unique[incident["number"]] = incident
+
+    incidents = list(unique.values())
+
+    def sort_date(item):
+        try:
+            return datetime.strptime(
+                item["date"],
+                "%d %b %Y"
+            )
+        except ValueError:
+            return datetime.min
+
+    incidents.sort(
+        key=sort_date,
+        reverse=True
+    )
+
+    incidents = incidents[:20]
+
+    with OUTPUT_FILE.open(
+        "w",
+        encoding="utf-8"
+    ) as file:
+        json.dump(
+            incidents,
+            file,
+            indent=2,
+            ensure_ascii=False
+        )
+        file.write("\n")
+
+    print(
+        "Successfully wrote",
+        len(incidents),
+        "UKMTO incidents."
+    )
+
 
 if __name__ == "__main__":
-main()
+    main()
