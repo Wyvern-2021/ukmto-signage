@@ -4,16 +4,7 @@ INDEX_URL="https://mscio.eu/folder/documents/UKMTO%20Warnings/"
 OUTPUT="incidents.json"
 echo "Getting UKMTO warning index..."
 curl -L -A "Mozilla/5.0" -s "$INDEX_URL" > ukmto_index.html
-grep -oE 'href="[^"]+.pdf[^"]"' ukmto_index.html | \
-sed 's/^href="//;s/"$//' | \
-sed 's/&amp;/&/g' | \
-while read -r URL
-do
-case "$URL" in
-http) echo "$URL" ;;
-/) echo "https://mscio.eu$URL" ;;
-esac
-done | sort -u | head -30 > ukmto_links.txt
+python3 -c 'import re,html; s=open("ukmto_index.html",encoding="utf-8").read(); urls=re.findall(r"(?:https?:)?//[^"'"'"'<> ]+.pdf[^"'"'"'<> ]|/[^"'"'"'<> ]+.pdf[^"'"'"'<> ])",html.unescape(s),re.I); [print(("https://mscio.eu"+u if u.startswith("/") else ("https:"+u if u.startswith("//") else u))) for u in dict.fromkeys(urls)][:30]' > ukmto_links.txt
 COUNT=$(wc -l < ukmto_links.txt)
 echo "Found $COUNT UKMTO PDF links."
 if [ "$COUNT" -eq 0 ]
