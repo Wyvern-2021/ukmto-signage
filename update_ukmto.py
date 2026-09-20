@@ -52,8 +52,7 @@ text = page.extract_text() or ""
 pages.append(text)
 except Exception:
 pass
-text = clean("
-".join(pages))
+text = clean("\n".join(pages))
 if not text:
 return None
 warning_match = re.search(
