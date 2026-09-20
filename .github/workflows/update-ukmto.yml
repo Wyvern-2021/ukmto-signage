@@ -25,7 +25,10 @@ jobs:
           pip install requests beautifulsoup4 pypdf
 
       - name: Update UKMTO data
-        run: python update_ukmto.py
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+          bash update_ukmto.sh
 
       - name: Commit updated incidents
         run: |
