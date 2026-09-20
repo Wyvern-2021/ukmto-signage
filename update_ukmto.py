@@ -56,7 +56,6 @@ text = clean("
 ".join(pages))
 if not text:
 return None
-# Warning number and type.
 warning_match = re.search(
 r"(\d{3}-\d{2})\s-\s([A-Z][A-Z ]+)",
 text,
@@ -66,7 +65,6 @@ if not warning_match:
 return None
 number = warning_match.group(1)
 incident_type = clean(warning_match.group(2)).upper()
-# Report date.
 date_match = re.search(
 r"Report Date:\s(\d{1,2}\s+[A-Za-z]{3}\s+\d{4})",
 text,
@@ -80,7 +78,6 @@ date_obj = datetime.strptime(raw_date, "%d %b %Y")
 display_date = date_obj.strftime("%d %b %Y").upper()
 except ValueError:
 display_date = raw_date.upper()
-# Try to find the location.
 location = ""
 location_patterns = [
 r"incident\s+[^.]{0,150}?\b(?:of|near|off|south of|north of|east of|west of)\s+([^.
@@ -88,14 +85,16 @@ r"incident\s+[^.]{0,150}?\b(?:of|near|off|south of|north of|east of|west of)\s+(
 r"^\s([A-Z][A-Za-z .'-]+,\s[A-Z][A-Za-z .'-]+)\s$",
 ]
 for pattern in location_patterns:
-match = re.search(pattern, text, re.IGNORECASE | re.MULTILINE)
+match = re.search(
+pattern,
+text,
+re.IGNORECASE | re.MULTILINE,
+)
 if match:
 candidate = clean(match.group(1))
 if 3 <= len(candidate) <= 100:
 location = candidate
 break
-# The main incident narrative normally begins with:
-# "UKMTO has received..."
 description_match = re.search(
 r"(UKMTO has received.?)(?:Vessels are advised|watchkeepers@ukmto.org|UKMTO UK Maritime)",
 text,
@@ -117,12 +116,6 @@ return {
 }
 
 def find_pdf_links():
-"""
-Try to discover UKMTO PDF links from the Recent Incidents page.
-UKMTO currently renders much of this page dynamically, so this may
-return zero links. That is treated as a failed acquisition rather
-than an empty incident feed.
-"""
 response = requests.get(
 UKMTO_RECENT_URL,
 headers=HEADERS,
@@ -145,7 +138,6 @@ return sorted(links)
 
 def main():
 print("Retrieving UKMTO warning documents...")
-existing = load_existing()
 try:
 pdf_links = find_pdf_links()
 except Exception as exc:
@@ -155,8 +147,8 @@ return
 print(f"Found {len(pdf_links)} UKMTO PDF links.")
 if not pdf_links:
 print(
-"UKMTO did not expose warning PDF links in the automated "
-"page response."
+"UKMTO did not expose warning PDF links in the "
+"automated page response."
 )
 print("Keeping existing incidents.json.")
 return
@@ -173,7 +165,6 @@ if not incidents:
 print("No valid UKMTO warnings could be extracted.")
 print("Keeping existing incidents.json.")
 return
-# Newest first.
 def sort_key(item):
 try:
 return datetime.strptime(
@@ -183,14 +174,11 @@ item["date"],
 except Exception:
 return datetime.min
 incidents.sort(key=sort_key, reverse=True)
-# Remove duplicate warning numbers, keeping the newest version.
 unique = {}
 for incident in incidents:
 unique[incident["number"]] = incident
 incidents = list(unique.values())
-# Keep the 20 most recent warnings.
 incidents = incidents[:20]
-# Remove the private URL field before writing the public JSON.
 for incident in incidents:
 incident.pop("_url", None)
 with OUTPUT_FILE.open("w", encoding="utf-8") as f:
