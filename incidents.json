@@ -1,142 +1,302 @@
 [
   {
-    "number": "UKMTO WARNING 071-26",
-    "date": "",
+    "number": "UKMTO WARNING 134-26",
+    "warning_number": "134-26",
+    "date": "12 SEP 2026",
+    "time": "2300 UTC",
     "type": "ATTACK",
-    "location": "UKMTO AREA OF OPERATIONS",
-    "description": "UKMTO WARNING 071-26 - ATTACK Report Date: Report Time: Issue Date: Source 17 Jun 2026 1610UTC 17 Jun 2026 Company Security Officer UKMTO has received a report of an incident 105NM northeast of Aden, Yemen. A vessel has been approached to within 4 meters and fired upon by 2 skiffs with an unknown number of armed persons on board. The vessel has deployed security team and returned fire. The suspect vessels have now disengaged and are in excess 4NM of the vessel. The crew are safe. Vessels are advised to transit with caution and report any suspicious activity to UKMTO, while authorities are investigating. Aden, Yemen | watchkeepers@ukmto.org | +44 (0)2392 222060 | +44 7779 966976 | +44 7585 795608 | www.ukmto.org"
-  },
-  {
-    "number": "UKMTO WARNING 108-26",
-    "date": "",
-    "type": "ATTACK",
-    "location": "UKMTO AREA OF OPERATIONS",
-    "description": "UKMTO WARNING 108-26 - ATTACK Report Date: Report Time: Issue Date: Source 08 Aug 2026 TBC 08 Aug 2026 Verified UKMTO has received a report of an incident 18NM east of Khasab, Oman. A verified source has reported that a vessel was struck by an unknown projectile which caused a fire that has been extinguished. There is no reported environmental impact. The vessel and crew are reported as safe. Authorities are investigating. Vessels are advised to transit with caution and report any suspicious activity to UKMTO. Khasab, Oman | watchkeepers@ukmto.org | +44 (0) 2392 222060 | +44 (0) 7779 966976 | +44 (0) 7585 795608 | www.ukmto.org"
-  },
-  {
-    "number": "UKMTO WARNING 083-26",
-    "date": "",
-    "type": "ATTACK",
-    "location": "UKMTO AREA OF OPERATIONS",
-    "description": "UKMTO WARNING 083-26 - ATTACK Report Date: Report Time: Issue Date: Source 11 Jul 2026 2240UTC 11 Jul 2026 Military authorities UKMTO has received a report of an incident 9NM east of Oman. Military authorities have reported that a container ship has sustained damage to the rear of the vessel which has caused a fire onboard. Authorities are investigating. Vessels are advised to transit with caution and report any suspicious activity to UKMTO. Oman | watchkeepers@ukmto.org | +44 (0)2392 222060 | +44 7779 966976 | +44 7585 795608 | www.ukmto.org"
-  },
-  {
-    "number": "UKMTO WARNING 057-26",
-    "date": "",
-    "type": "SUSPICIOUS ACTIVITY",
-    "location": "UKMTO AREA OF OPERATIONS",
-    "description": "UKMTO WARNING 057-26 - SUSPICIOUS ACTIVITY Report Date: Report Time: Issue Date: Source 14 May 2026 0545UTC 14 May 2026 Company Security Officer UKMTO has received a report of an incident 38NM northeast of Fujairah, United Arab Emirates. The CSO has reported that the vessel has been taken by unauthorised personnel whist at anchor and is now bound for Iranian Territorial Waters. UKMTO continue to investigate. Vessels are advised to report any suspicious activity to UKMTO. Fujairah, UAE | watchkeepers@ukmto.org | +44 (0)2392 222060 | +44 7779 966976 | +44 7585 795608 | www.ukmto.org"
-  },
-  {
-    "number": "UKMTO WARNING 117-26",
-    "date": "",
-    "type": "ATTACK",
-    "location": "UKMTO AREA OF OPERATIONS",
-    "description": "UKMTO WARNING 117-26 - ATTACK Report Date: Report Time: Issue Date: Source 17 Aug 2026 1100UTC 18 Aug 2026 Local Authorities UKMTO has received a report of an incident 40NM southeast of Al Mukha, Yemen. Local Authorities report a cargo ship being struck by multiple unknown projectiles. The cargo vessel was unmanned at the time of the incident; however, the damage has resulted in a complete constructive loss. Authorities are investigating. Vessels are advised to transit with caution and report any suspicious activity to UKMTO. Al Mukha, Yemen | watchkeepers@ukmto.org | +44 (0)2392 222060 | +44 7779 966976 | +44 7585 795608 | www.ukmto.org"
-  },
-  {
-    "number": "UKMTO WARNING 039-26",
-    "date": "",
-    "type": "SUSPICIOUS ACTIVITY",
-    "location": "UKMTO AREA OF OPERATIONS",
-    "description": "UKMTO WARNING 039-26 - SUSPICIOUS ACTIVITY Report Date: Report Time: Issue Date: Source 18 Apr 2026 1208UTC 18 Apr 2026 Master UKMTO has received a report of an incident 3NM east of OMAN. The Master of a Cruise ship reported sighting a splash in close proximity of the vessel. Vessels are advised to report suspicious activity to UKMTO. OMAN | watchkeepers@ukmto.org | +44 (0)2392 222060 | +44 7779 966976 | +44 7585 795608 | www.ukmto.org"
-  },
-  {
-    "number": "UKMTO WARNING 012-26",
-    "date": "",
-    "type": "ATTACK",
-    "location": "UKMTO AREA OF OPERATIONS",
-    "description": "UKMTO WARNING 012-26 - ATTACK Report Date: Report Time: Issue Date: Source 04 Mar 2026 1109UTC 04 Mar 2026 Company Security Officer UKMTO has received a report of an incident 2NM north of Oman transiting eastbound in the Straits of Hormuz. A container ship has reported being hit by an unknown projectile just above the water line causing a fire in the engine room. No environmental impact has been reported at this time. Authorities are investigating. Vessels are advised to transit with caution and report any suspicious activity to UKMTO. Oman | watchkeepers@ukmto.org | +44 (0)2392 222060 | +44 7779 966976 | +44 7585 795608 | www.ukmto.org"
-  },
-  {
-    "number": "UKMTO WARNING 130-26",
-    "date": "",
-    "type": "ATTACK",
-    "location": "UKMTO AREA OF OPERATIONS",
-    "description": "UKMTO WARNING 130-26 - ATTACK Report Date: Report Time: Issue Date: Source 09 Sept 26 0248UTC 09 Sept 26 Third Party UKMTO has received a report from a third-party of an incident 24NM northwest of Port Rashid, UAE. The Master of a tanker has reported sighting a vessel listing while at anchor, possibly indicating water ingress following an attack from an unknown projectile. Vessels are advised to transit with caution and report any suspicious activity to UKMTO whilst authorities are investigating. Port Rashid, UAE | watchkeepers@ukmto.org | +44 (0) 2392 222060 | +44 (0) 7779 966976 | +44 (0) 7585 795608 | www.ukmto.org"
-  },
-  {
-    "number": "UKMTO WARNING 101-26",
-    "date": "",
-    "type": "ATTACK",
-    "location": "UKMTO AREA OF OPERATIONS",
-    "description": "UKMTO WARNING 101-26 - ATTACK Report Date: Report Time: Issue Date: Source 31 Jul 2026 2330UTC 01 Aug 2026 Company Security Officer UKMTO has received a report of an incident 11NM northeast off Lima, Oman. The CSO of a tanker reports the vessel has been struck by an unknown projectile which has caused damage to the engine room. The tanker is not under command and the regional Coast Guard have been informed. There are no reported causalities or environmental impact. Authorities are investigating. Vessels are advised to transit with caution and report any suspicious activity to UKMTO. Lima, Oman | watchkeepers@ukmto.org | +44 (0) 2392 222060 | +44 (0) 7779 966976 | +44 (0) 7585 795608 | www.ukmto.org"
-  },
-  {
-    "number": "UKMTO WARNING 020-26",
-    "date": "",
-    "type": "ATTACK",
-    "location": "UKMTO AREA OF OPERATIONS",
-    "description": "UKMTO WARNING 020-26 - ATTACK Report Date: Report Time: Issue Date: Source 11 Mar 2026 0205UTC 11 Mar 2026 Master UKMTO has received a report of an incident 50NM northwest of Dubai, United Arab Emirates. The Master of a Bulk Carrier has reported their vessel being hit by an unknown projectile. There is no report of any environmental impact. The crew are reported safe and well. Authorities are investigating. Vessels are advised to transit with caution and report any suspicious activity to UKMTO. Dubai, United Arab Emirates tHE | watchkeepers@ukmto.org | +44 (0)2392 222060 | +44 7779 966976 | +44 7585 795608 | www.ukmto.org"
-  },
-  {
-    "number": "UKMTO WARNING 120-26",
-    "date": "",
-    "type": "ATTACK",
-    "location": "UKMTO AREA OF OPERATIONS",
-    "description": "UKMTO WARNING 120-26 - ATTACK Report Date: Report Time: Issue Date: Source 24 Aug 2026 2025UTC 24 Aug 2026 Master UKMTO has received a report of an incident 9NM northeast of Ash Shishah, Oman. The Master of an oil tanker reports the vessel has been struck by an unknown projectile causing damage to the engine room and disabling the vessel. Crew are reported safe. Environmental impact is unknown at time of report. Vessels are advised to transit with caution and report any suspicious activity to UKMTO. Authorities are investigating. Ash Shishah, Oman | watchkeepers@ukmto.org | +44 (0)2392 222060 | +44 7779 966976 | +44 7585 795608 | www.ukmto.org"
-  },
-  {
-    "number": "UKMTO WARNING 029-26",
-    "date": "",
-    "type": "SUSPICIOUS ACTIVITY",
-    "location": "UKMTO AREA OF OPERATIONS",
-    "description": "UKMTO WARNING 029-26 - SUSPICIOUS ACTIVITY Report Date: Report Time: Issue Date: Source 30 Mar 2026 2020UTC 30 Mar 2026 CSO/Third Party Reports UKMTO has received a report of an incident 31NM northwest of Dubai, United Arab Emirates. The Company Security Officer reported an unknown projectile had struck their tanker on the starboard side causing a fire to the vessel. The crew are accounted for and safe. No environmental impact has been reported. Authorities are investigating. Vessels are advised to transit with caution and report any suspicious activity to UKMTO. Dubai, United Arab Emirates | watchkeepers@ukmto.org | +44 (0)2392 222060 | +44 7779 966976 | +44 7585 795608 | www.ukmto.org"
-  },
-  {
-    "number": "UKMTO WARNING 025-26",
-    "date": "",
-    "type": "SUSPICIOUS ACTIVITY",
-    "location": "UKMTO AREA OF OPERATIONS",
-    "description": "UKMTO WARNING 025-26 - SUSPICIOUS ACTIVITY Report Date: Report Time: Issue Date: Source 19 Mar 2026 0130UTC 19 Mar 2026 Third Party UKMTO has received a report of an incident 4NM east of Ras Laffan, Qatar. It has been reported to UKMTO that a vessel has been hit by an unknown projectile. All crew are reported safe and well. Vessels are advised to transit with caution and report any suspicious activity to UKMTO While authorities continue to investigate. Ras Laffan, Qatar | watchkeepers@ukmto.org | +44 (0)2392 222060 | +44 7779 966976 | +44 7585 795608 | www.ukmto.org"
-  },
-  {
-    "number": "UKMTO WARNING 093-26",
-    "date": "",
-    "type": "ATTACK",
-    "location": "UKMTO AREA OF OPERATIONS",
-    "description": "UKMTO WARNING 093-26 - ATTACK Report Date: Report Time: Issue Date: Source 19 Jul 2026 2230UTC 20 Jul 2026 Master UKMTO has received a report of an incident 17NM east of Dibba, United Arab Emirates. The Master of a vessel reports being struck by an unknown projectile causing damage to the steering gear. All the crew are reported as safe. There is no environmental impact. Authorities are investigating. Vessels are advised to transit with caution and report any suspicious activity to UKMTO. Dibba, United Arab Emirates | watchkeepers@ukmto.org | +44 (0)2392 222060 | +44 7779 966976 | +44 7585 795608 | www.ukmto.org"
-  },
-  {
-    "number": "UKMTO WARNING 048-26",
-    "date": "",
-    "type": "SUSPICIOUS ACTIVITY",
-    "location": "IRTC, 92NM southwest of Al Mukalla, Yemen",
-    "description": "UKMTO WARNING 048-26 - SUSPICIOUS ACTIVITY Report Date: Report Time: Issue Date: Source 01 May 2026 0530UTC 01 May 2026 Master UKMTO has received a report of an incident within the IRTC, 92NM southwest of Al Mukalla, Yemen. The Master of bulk carrier has reported being approached by a skiff with a black hull carrying seven armed persons. Vessels are advised to transit with caution and report any suspicious activity to UKMTO while authorities continue to investigate. | watchkeepers@ukmto.org | +44 (0)2392 222060 | +44 7779 966976 | +44 7585 795608 | www.ukmto.org"
+    "location": "STRAIT OF HORMUZ",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident within the Strait of Hormuz. A vessel has been struck by an unknown projectile while transiting the Strait of Hormuz. Status of crew, damage assessment and environmental impact are unknown at present. Update 001: A fire has broken out onboard the vessel following the reported attack. Local authorities are on the scene and assisting in evacuating crew members."
   },
   {
     "number": "UKMTO WARNING 133-26",
-    "date": "",
+    "warning_number": "133-26",
+    "date": "10 SEP 2026",
+    "time": "1910 UTC",
     "type": "ATTACK",
-    "location": "UKMTO AREA OF OPERATIONS",
-    "description": "UKMTO WARNING 133-26 - ATTACK Report Date: Report Time: Issue Date: Source 10 Sep 2026 1910UTC 10 Sep 2026 Third Party UKMTO has received a report of two vessels involved in an incident 4NM west of Khasab Oman. The Master of the vessel reports seeing four unknown projectiles hit two unknown vessels causing a fire on one vessel and unsure of the status of the second vessel, 6NM north of his position. Authorities are investigating. Vessels are advised to transit with caution and report any suspicious activity to UKMTO. Khasab, Oman | watchkeepers@ukmto.org | +44 (0)2392 222060 | +44 7779 966976 | +44 7585 795608 | www.ukmto.org"
+    "location": "LOCATION NOT SPECIFIED",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of two vessels involved in an incident 4NM west of Khasab Oman. The Master of the vessel reports seeing four unknown projectiles hit two unknown vessels causing a fire on one vessel and unsure of the status of the second vessel, 6NM north of his position. Authorities are investigating."
   },
   {
-    "number": "UKMTO WARNING 009-26",
-    "date": "",
-    "type": "SUSPICIOUS ACTIVITY",
-    "location": "UKMTO AREA OF OPERATIONS",
-    "description": "UKMTO WARNING 009-26 - SUSPICIOUS ACTIVITY Report Date: Report Time: Issue Date: Source 03 Mar 2026 1950UTC 03 Mar 2026 Master UKMTO has received a report of an incident 137NM east of Muscat, Oman. The Master reported a loud explosion in close proximity of the vessel followed by smoke in the water. The vessel and crew are safe. Authorities are investigating. Vessels are advised to transit with caution and report any suspicious activity to UKMTO. Muscat, Oman | watchkeepers@ukmto.org | +44 (0)2392 222060 | +44 7779 966976 | +44 7585 795608 | www.ukmto.org"
+    "number": "UKMTO WARNING 131-26",
+    "warning_number": "131-26",
+    "date": "09 SEP 2026",
+    "time": "0230 UTC",
+    "type": "ATTACK",
+    "location": "LOCATION NOT SPECIFIED",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident 28NM south-east of Al-Faw, Iraq. The Master of a tanker has reported being struck by an unknown projectile. Crew are reported safe and there is no environmental impact reported at this time."
+  },
+  {
+    "number": "UKMTO WARNING 124-26",
+    "warning_number": "124-26",
+    "date": "31 AUG 2026",
+    "time": "2000 UTC",
+    "type": "ATTACK",
+    "location": "STRAIT OF HORMUZ",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident 17NM east of Khasab, Oman. A tanker has reported being struck by 3 unknown projectiles whilst completing an outbound transit of the Strait of Hormuz. No casualties or environmental impact has been reported. Authorities are investigating."
+  },
+  {
+    "number": "UKMTO WARNING 122-26",
+    "warning_number": "122-26",
+    "date": "29 AUG 2026",
+    "time": "2053 UTC",
+    "type": "ATTACK",
+    "location": "STRAIT OF HORMUZ",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a time-late report of an incident 12NM north of Khasab, Oman. A tanker has been struck by an unknown projectile whilst transiting inbound in the Strait of Hormuz. No casualties or environmental impact are reported at this time. Authorities are investigating."
+  },
+  {
+    "number": "UKMTO WARNING 121-26",
+    "warning_number": "121-26",
+    "date": "25 AUG 2026",
+    "time": "1730 UTC",
+    "type": "ATTACK",
+    "location": "STRAIT OF HORMUZ",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident in the Strait of Hormuz. Local authorities have reported a tanker has been hit by an unknown projectile causing fire to the vessel which has since been extinguished. All crew are reported as safe and accounted for and there has been no report of environmental impact. Authorities are investigating."
+  },
+  {
+    "number": "UKMTO WARNING 120-26",
+    "warning_number": "120-26",
+    "date": "24 AUG 2026",
+    "time": "2025 UTC",
+    "type": "ATTACK",
+    "location": "LOCATION NOT SPECIFIED",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident 9NM northeast of Ash Shishah, Oman. The Master of an oil tanker reports the vessel has been struck by an unknown projectile causing damage to the engine room and disabling the vessel. Crew are reported safe. Environmental impact is unknown at time of report."
+  },
+  {
+    "number": "UKMTO WARNING 119-26",
+    "warning_number": "119-26",
+    "date": "24 AUG 2026",
+    "time": "0637 UTC",
+    "type": "ATTACK",
+    "location": "LOCATION NOT SPECIFIED",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident 63NM west of Yanbu, Saudi Arabia. The Company Security Officer reported a tanker has been struck by unknown projectile causing a fire to the vessel on the main deck. All crew are safe and accounted for and no environmental impact has been reported."
+  },
+  {
+    "number": "UKMTO WARNING 114-26",
+    "warning_number": "114-26",
+    "date": "17 AUG 2026",
+    "time": "1136 UTC",
+    "type": "HIJACK",
+    "location": "LOCATION NOT SPECIFIED",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident 4NM south of MAREEYO SOMALIA. The CSO of a cargo vessel reports being boarded by 8 armed unauthorised persons who have taken control of the vessel. Authorities are investigating."
+  },
+  {
+    "number": "UKMTO WARNING 117-26",
+    "warning_number": "117-26",
+    "date": "17 AUG 2026",
+    "time": "1100 UTC",
+    "type": "ATTACK",
+    "location": "LOCATION NOT SPECIFIED",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident 40NM southeast of Al Mukha, Yemen. Local Authorities report a cargo ship being struck by multiple unknown projectiles. The cargo vessel was unmanned at the time of the incident; however, the damage has resulted in a complete constructive loss. Authorities are investigating."
+  },
+  {
+    "number": "UKMTO WARNING 116-26",
+    "warning_number": "116-26",
+    "date": "15 AUG 2026",
+    "time": "2200 UTC",
+    "type": "ATTACK",
+    "location": "STRAIT OF HORMUZ",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a time late report of an incident in the Strait of Hormuz. A third party has reported that a bulk carrier was struck by an unknown projectile whilst conducting a transit of the Strait of Hormuz. The impact caused damage to the starboard side of the vessel and resulted in a crew casualty. There is no report of an environmental impact. Authorities are investigating."
+  },
+  {
+    "number": "UKMTO WARNING 113-26",
+    "warning_number": "113-26",
+    "date": "14 AUG 2026",
+    "time": "2000 UTC",
+    "type": "ATTACK",
+    "location": "STRAIT OF HORMUZ UKMTO HAS RECEIVED A VERIFIED REPORT OF A BULK CARRIER BEING STRUCK BY AN UNKNOWN PROJECTILE WHICH HAS",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident in the Strait of Hormuz UKMTO has received a verified report of a Bulk carrier being struck by an unknown projectile which has hit the hull. The crew are reported safe, no damage assessment has been reported and environmental impact is unknown at present."
+  },
+  {
+    "number": "UKMTO WARNING 112-26",
+    "warning_number": "112-26",
+    "date": "13 AUG 2026",
+    "time": "1552 UTC",
+    "type": "ATTACK",
+    "location": "STRAIT OF HORMUZ",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident in the Strait of Hormuz. UKMTO has received reports from Military Authorities that a tanker was struck by a Uncrewed Ariel Vehicle (UAV) whilst conducting an outbound transit of the Strait of Hormuz. The vessel was subject to minor damage, crew are reported as safe and accounted for and no environmental impact has been reported."
+  },
+  {
+    "number": "UKMTO WARNING 111-26",
+    "warning_number": "111-26",
+    "date": "13 AUG 2026",
+    "time": "1552 UTC",
+    "type": "ATTACK",
+    "location": "STRAIT OF HORMUZ",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident in the Strait of Hormuz. UKMTO has received reports from Military Authorities that a tanker was struck by a Uncrewed Ariel Vehicle (UAV) whilst conducting an outbound transit of the Strait of Hormuz. The vessel was subject to minor damage, crew are reported as safe and accounted for and no environmental impact has been reported."
   },
   {
     "number": "UKMTO WARNING 105-26",
-    "date": "",
+    "warning_number": "105-26",
+    "date": "04 AUG 2026",
+    "time": "0730 UTC",
     "type": "ATTACK",
-    "location": "UKMTO AREA OF OPERATIONS",
-    "description": "UKMTO WARNING 105-26 - ATTACK Report Date: Report Time: Issue Date: Source 04 AUG 2026 0730UTC 05 AUG 2026 Company Security Officer UKMTO has received a time-late report of an incident 9NM southwest of Al Mukha, Yemen. The CSO of the vessel has reported that the vessel was attacked by an Uncrewed Surface Vessel which caused a fire onboard. The crew have been rescued by local authorities and are safe and well. The vessel has been reported as sunk. Vessels are advised to transit with caution and report any suspicious activity to UKMTO while authorities are investigating. Al Mukha, Yemen | watchkeepers@ukmto.org | +44 (0) 2392 222060 | +44 (0) 7779 966976 | +44 (0) 7585 795608 | www.ukmto.org"
+    "location": "LOCATION NOT SPECIFIED",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a time-late report of an incident 9NM southwest of Al Mukha, Yemen. The CSO of the vessel has reported that the vessel was attacked by an Uncrewed Surface Vessel which caused a fire onboard. The crew have been rescued by local authorities and are safe and well. The vessel has been reported as sunk."
   },
   {
-    "number": "UKMTO WARNING 038-26",
-    "date": "",
+    "number": "UKMTO WARNING 104-26",
+    "warning_number": "104-26",
+    "date": "03 AUG 2026",
+    "time": "2200 UTC",
     "type": "ATTACK",
-    "location": "UKMTO AREA OF OPERATIONS",
-    "description": "UKMTO WARNING 038-26 - ATTACK Report Date: Report Time: Issue Date: Source 18 Apr 2026 1125UTC 18 Apr 2026 Company Security Officer UKMTO has received a report of an incident 25NM northeast of OMAN. A report of a Container Ship being hit by an unknown projectile which caused damage to some of the containers, no fires or environment impact reported. Authorities are investigating. Vessels are advised to report suspicious activity to UKMTO. Oman | watchkeepers@ukmto.org | +44 (0)2392 222060 | +44 7779 966976 | +44 7585 795608 | www.ukmto.org"
+    "location": "LOCATION NOT SPECIFIED",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident 20NM northeast of Al Khasab, Oman. A cargo vessel has broadcasted on VHF 16 that they have been hit by an unknown projectile. Authorities are investigating."
   },
   {
-    "number": "UKMTO WARNING 077-26",
-    "date": "",
+    "number": "UKMTO WARNING 103-26",
+    "warning_number": "103-26",
+    "date": "02 AUG 2026",
+    "time": "2037 UTC",
     "type": "SUSPICIOUS ACTIVITY",
-    "location": "UKMTO AREA OF OPERATIONS",
-    "description": "UKMTO WARNING 077-26 - SUSPICIOUS ACTIVITY Report Date: Report Time: Issue Date: Source 01 Jul 2026 0715UTC 01 Jul 2026 Company Security Officer UKMTO has received a report of an incident 76NM south of BALHAF, YEMEN. The CSO reports a vessel being approached by multiple small craft with several POB bearing small arms. The Crew are mustered in the citadel and are reported as safe. The Master of a third- party vessel in the vicinity, reported small arms fired over Ch 16, this remains unconfirmed. UKMTO are continuing to investigating. Vessels are advised to transit with caution and report any suspicious activity to UKMTO. Balhaf, Yemen | watchkeepers@ukmto.org | +44 (0)2392 222060 | +44 7779 966976 | +44 7585 795608 | www.ukmto.org"
+    "location": "LOCATION NOT SPECIFIED",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident 20NM northeast of Khasab, Oman. The Master of a tanker reports hearing an explosion in close proximity of the vessel. The vessel and crew are all reported as safe. Authorities are investigating."
+  },
+  {
+    "number": "UKMTO WARNING 101-26",
+    "warning_number": "101-26",
+    "date": "31 JUL 2026",
+    "time": "2330 UTC",
+    "type": "ATTACK",
+    "location": "LOCATION NOT SPECIFIED",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident 11NM northeast off Lima, Oman. The CSO of a tanker reports the vessel has been struck by an unknown projectile which has caused damage to the engine room. The tanker is not under command and the regional Coast Guard have been informed. There are no reported causalities or environmental impact. Authorities are investigating."
+  },
+  {
+    "number": "UKMTO WARNING 102-26",
+    "warning_number": "102-26",
+    "date": "31 JUL 2026",
+    "time": "2206 UTC",
+    "type": "ATTACK",
+    "location": "LOCATION NOT SPECIFIED",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident 21NM northeast of Khasab, Oman. The Master of a tanker reports seeing a large splash and explosion in close proximity to the vessel. No damage to the vessel has been reported at this time. Authorities are investigating."
+  },
+  {
+    "number": "UKMTO WARNING 095-26",
+    "warning_number": "095-26",
+    "date": "22 JUL 2026",
+    "time": "2000 UTC",
+    "type": "ATTACK",
+    "location": "LOCATION NOT SPECIFIED",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident 70NM southwest of AL SHUQAIQ, Saudi Arabia. The Master of a tanker reports being struck by an unknown projectile which has caused a fire onboard that the crew are currently fighting. There are no reported casualties and no environmental impact. Authorities are investigating."
+  },
+  {
+    "number": "UKMTO WARNING 094-26",
+    "warning_number": "094-26",
+    "date": "20 JUL 2026",
+    "time": "2010 UTC",
+    "type": "ATTACK",
+    "location": "8NM NORTHEAST OF LIMAH, OMAN UKMTO HAS RECEIVED MULTIPLE REPORTS THAT",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident 8NM northeast of LIMAH, OMAN UKMTO has received multiple reports that a tanker is reporting over VHF Channel 16 that it has been struck by an unknown projectile in the Strait of Hormuz. UPDATE 001: The CSO of the tanker has reported to UKMTO that the crew have abandoned the vessel and are currently embarked in a lifeboat. No environmental impact has been reported. Authorities are investigating."
+  },
+  {
+    "number": "UKMTO WARNING 092-26",
+    "warning_number": "092-26",
+    "date": "19 JUL 2026",
+    "time": "2245 UTC",
+    "type": "ATTACK",
+    "location": "LOCATION NOT SPECIFIED",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident 8NM northwest of Kumzar, Oman. UKMTO have received information from military authorities that a vessel is on fire. The cause of the fire has not been verified as this time. Update – 001 UKMTO has reclassified as an Attack. The CSO has confirmed the vessel was struck by an unknown projectile. The crew safely abandoned the vessel and have been recovered by a tug boat. The fire has not been extinguished and the vessel is currently adrift. There is no reported environmental impact."
+  },
+  {
+    "number": "UKMTO WARNING 093-26",
+    "warning_number": "093-26",
+    "date": "19 JUL 2026",
+    "time": "2230 UTC",
+    "type": "ATTACK",
+    "location": "LOCATION NOT SPECIFIED",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident 17NM east of Dibba, United Arab Emirates. The Master of a vessel reports being struck by an unknown projectile causing damage to the steering gear. All the crew are reported as safe. There is no environmental impact. Authorities are investigating."
+  },
+  {
+    "number": "UKMTO WARNING 090-26",
+    "warning_number": "090-26",
+    "date": "17 JUL 2026",
+    "time": "0800 UTC",
+    "type": "SUSPICIOUS ACTIVITY",
+    "location": "GULF OF ADEN",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident 65NM south of Al Mukalla, Yemen. Military authorities have reported that the vessel was boarded by unauthorised personnel whilst transiting east in the Gulf of Aden. Authorities are investigating."
+  },
+  {
+    "number": "UKMTO WARNING 088-26",
+    "warning_number": "088-26",
+    "date": "16 JUL 2026",
+    "time": "2210 UTC",
+    "type": "ATTACK",
+    "location": "LOCATION NOT SPECIFIED",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident 19NM east of Khasab, Oman. A tanker has reported being hit by an unknown projectile causing minor structural damage to the port side. All crew are safe and accounted for, no environmental impact has been reported and the vessel is continuing to its next port of call. Authorities are investigating."
+  },
+  {
+    "number": "UKMTO WARNING 085-26",
+    "warning_number": "085-26",
+    "date": "13 JUL 2026",
+    "time": "2104 UTC",
+    "type": "ATTACK",
+    "location": "LOCATION NOT SPECIFIED",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident 40NM northeast of Qalhat, Oman. The Master of a Tanker reports being hit by an unknown projectile on the starboard side engine room. All crew are safe and accounted for with no environmental impact reported."
+  },
+  {
+    "number": "UKMTO WARNING 084-26",
+    "warning_number": "084-26",
+    "date": "13 JUL 2026",
+    "time": "1019 UTC",
+    "type": "SUSPICIOUS ACTIVITY",
+    "location": "LOCATION NOT SPECIFIED",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident 50NM south of Aden, Yemen. A tanker travelling east in the IRTC has reported being approached by 6 small boats approaching from the starboard side. One small boat has closed to 5 cables and the AST on board the tanker has fired warning shots. The other 5 small boats have remained at 1NM. Authorities are investigating."
+  },
+  {
+    "number": "UKMTO WARNING 083-26",
+    "warning_number": "083-26",
+    "date": "11 JUL 2026",
+    "time": "2240 UTC",
+    "type": "ATTACK",
+    "location": "LOCATION NOT SPECIFIED",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident 9NM east of Oman. Military authorities have reported that a container ship has sustained damage to the rear of the vessel which has caused a fire onboard. UPDATE 001: UKMTO has been informed by military authorities and the CSO of the vessel that the crew have abandoned the vessel and are currently embarked in a lifeboat. UPDATE 002: UKMTO has spoken to the CSO of the container ship who confirms that the crew has been rescued by local authorities. Authorities continue to investigate."
+  },
+  {
+    "number": "UKMTO WARNING 080-26",
+    "warning_number": "080-26",
+    "date": "06 JUL 2026",
+    "time": "2119 UTC",
+    "type": "ATTACK",
+    "location": "LOCATION NOT SPECIFIED",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident 8NM east of Limah, Oman. A tanker has reported being hit by an unknown projectile on the port side causing a fire, whilst travelling southbound. No casualties or environmental impact reported. Authorities are investigating."
+  },
+  {
+    "number": "UKMTO WARNING 079-26",
+    "warning_number": "079-26",
+    "date": "05 JUL 2026",
+    "time": "0719 UTC",
+    "type": "ATTACK",
+    "location": "LOCATION NOT SPECIFIED",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident 30NM southwest of Al Hudaydah, Yemen. A cargo vessel has triggered a distress alert stating that they are under attack by unknown armed assailants. Authorities are investigating."
   }
 ]
