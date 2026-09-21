@@ -90,6 +90,17 @@ do
       2>/dev/null || true
 
 done < ukmto_links.txt
+echo "===== DEBUG: FIRST UKMTO TEXT FILES ====="
+
+for FILE in ukmto_pdfs/*.txt
+do
+    echo "===== $FILE ====="
+    sed -n '1,100p' "$FILE"
+    echo
+done
+
+echo "===== END DEBUG ====="
+
 
 echo "Processing warning documents..."
 
