@@ -1,5 +1,738 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=1920, height=1080"> <meta http-equiv="refresh" content="300"> <title>UKMTO Maritime Security</title> <style> * { box-sizing: border-box; } html, body { margin: 0; width: 100%; height: 100%; background: #06121d; color: #ffffff; font-family: Arial, Helvetica, sans-serif; overflow: hidden; } .header { height: 125px; background: #0a2235; border-bottom: 4px solid #16a9dc; display: flex; align-items: center; padding: 0 55px; } .logo { font-size: 43px; font-weight: 700; letter-spacing: 3px; } .subtitle { margin-left: 30px; font-size: 25px; color: #8eafc1; letter-spacing: 1px; } .live { margin-left: auto; color: #45e487; font-size: 23px; font-weight: bold; } .content { height: calc(100% - 195px); padding: 30px 55px; } .section-title { font-size: 27px; color: #55c6ed; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; } .incident { background: #102a3e; border-left: 8px solid #df4545; margin-bottom: 18px; padding: 20px 27px; min-height: 175px; } .incident.boarding { border-left-color: #f09b38; } .incident.suspicious { border-left-color: #f2c344; } .incident.other { border-left-color: #399bd0; } .meta { color: #91b2c4; font-size: 19px; margin-bottom: 7px; } .type { font-size: 31px; font-weight: bold; margin-bottom: 6px; } .location { font-size: 23px; color: #5fc8ed; margin-bottom: 10px; } .description { font-size: 21px; line-height: 1.32; color: #e2edf2; } .loading { font-size: 25px; color: #8eafc1; padding-top: 30px; } .error { font-size: 24px; color: #f28b8b; padding: 25px; background: #29151a; } .footer { height: 70px; position: absolute; bottom: 0; left: 0; right: 0; background: #050e17; border-top: 2px solid #19384c; display: flex; align-items: center; padding: 0 55px; color: #718d9d; font-size: 19px; } .source { color: #55c6ed; } .updated { margin-left: auto; } </style> </head> <body> <header class="header"> <div class="logo">UKMTO</div> <div class="subtitle">MARITIME SECURITY INCIDENTS</div> <div class="live">● LIVE MONITOR</div> </header> <main class="content"> <div class="section-title">Latest Maritime Security Activity</div>
-<div id="incidents">
-    <div class="loading">Loading latest incidents...</div>
-</div>
-</main> <footer class="footer"> <div> SOURCE: <span class="source">UK MARITIME TRADE OPERATIONS</span> </div> <div class="updated" id="updated"> Connecting to live feed... </div> </footer> <script> async function loadIncidents() { const container = document.getElementById("incidents"); try { const response = await fetch( "incidents.json?t=" + Date.now(), { cache: "no-store" } ); if (!response.ok) { throw new Error("Feed unavailable"); } const incidents = await response.json(); if (!Array.isArray(incidents) || incidents.length === 0) { throw new Error("No incidents available"); } container.innerHTML = incidents .slice(0, 4) .map(incident => { const type = (incident.type || "MARITIME SECURITY").toUpperCase(); let className = "incident"; if (type.includes("BOARD")) { className += " boarding"; } else if (type.includes("SUSPICIOUS")) { className += " suspicious"; } else if ( !type.includes("ATTACK") && !type.includes("HIJACK") ) { className += " other"; } return ` <div class="${className}"> <div class="meta"> ${incident.number || ""} ${incident.date ? " • " + incident.date : ""} </div> <div class="type"> ${type} </div> <div class="location"> ${incident.location || "Location not specified"} </div> <div class="description"> ${incident.description || ""} </div> </div> `; }) .join(""); document.getElementById("updated").textContent = "LAST DATA UPDATE: " + new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) + " • AUTO REFRESH: 5 MIN"; } catch (error) { container.innerHTML = ` <div class="error"> Unable to retrieve the live UKMTO incident feed. The display will automatically retry. </div> `; document.getElementById("updated").textContent = "FEED CONNECTION ERROR • RETRYING"; } } loadIncidents(); setInterval(loadIncidents, 300000); </script> </body> </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=1920, height=1080"
+>
+
+<meta
+  http-equiv="refresh"
+  content="1800"
+>
+
+<title>UKMTO Maritime Security</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: #06121d;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden;
+}
+
+/* ---------------------------------------------------------
+   HEADER
+--------------------------------------------------------- */
+
+.header {
+  height: 110px;
+  background: #0a2235;
+  border-bottom: 4px solid #16a9dc;
+  display: flex;
+  align-items: center;
+  padding: 0 55px;
+}
+
+.logo {
+  font-size: 43px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+.subtitle {
+  margin-left: 30px;
+  font-size: 25px;
+  color: #8eafc1;
+  letter-spacing: 1px;
+}
+
+.live {
+  margin-left: auto;
+  color: #45e487;
+  font-size: 23px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* ---------------------------------------------------------
+   MOVING TICKER
+--------------------------------------------------------- */
+
+.ticker {
+  height: 78px;
+  background: #081a29;
+  border-bottom: 2px solid #19384c;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ticker-label {
+  flex: 0 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+  background: #df4545;
+  color: #ffffff;
+  font-size: 21px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  z-index: 3;
+}
+
+.ticker-window {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.ticker-track {
+  display: inline-flex;
+  align-items: center;
+  min-width: max-content;
+  height: 78px;
+  animation: ticker-scroll 55s linear infinite;
+  will-change: transform;
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 600;
+  color: #e9f5fa;
+  padding-right: 85px;
+}
+
+.ticker-item .ticker-type {
+  color: #55c6ed;
+  margin-right: 16px;
+}
+
+.ticker-item .ticker-separator {
+  color: #59798a;
+  margin: 0 16px;
+}
+
+.ticker-item .ticker-vessel {
+  color: #ffffff;
+}
+
+.ticker-item .ticker-location {
+  color: #9bc5d8;
+}
+
+@keyframes ticker-scroll {
+  from {
+    transform: translateX(100vw);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* ---------------------------------------------------------
+   MAIN CONTENT
+--------------------------------------------------------- */
+
+.content {
+  height: calc(100% - 258px);
+  padding: 25px 55px 20px 55px;
+}
+
+.section-title {
+  height: 42px;
+  font-size: 26px;
+  color: #55c6ed;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+/* ---------------------------------------------------------
+   2 x 2 INCIDENT GRID
+--------------------------------------------------------- */
+
+.incident-grid {
+  height: calc(100% - 57px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 18px;
+}
+
+.incident {
+  position: relative;
+  background: #102a3e;
+  border: 1px solid #1d455b;
+  border-left: 8px solid #df4545;
+  padding: 22px 28px;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.incident.boarding {
+  border-left-color: #f09b38;
+}
+
+.incident.suspicious {
+  border-left-color: #f2c344;
+}
+
+.incident.hijack {
+  border-left-color: #b85de8;
+}
+
+.incident.other {
+  border-left-color: #399bd0;
+}
+
+/* ---------------------------------------------------------
+   CARD CONTENT
+--------------------------------------------------------- */
+
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.type {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.warning-number {
+  color: #7698aa;
+  font-size: 17px;
+  letter-spacing: 1px;
+}
+
+.datetime {
+  color: #91b2c4;
+  font-size: 21px;
+  margin-bottom: 17px;
+}
+
+.vessel-label,
+.location-label {
+  color: #6f91a3;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 4px;
+}
+
+.vessel {
+  color: #ffffff;
+  font-size: 29px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.location {
+  color: #5fc8ed;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.description {
+  margin-top: 14px;
+  color: #d5e5eb;
+  font-size: 18px;
+  line-height: 1.28;
+  max-height: 47px;
+  overflow: hidden;
+}
+
+/* ---------------------------------------------------------
+   LOADING / ERROR
+--------------------------------------------------------- */
+
+.loading {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: #8eafc1;
+}
+
+.error {
+  grid-column: 1 / -1;
+  background: #29151a;
+  border: 1px solid #71353d;
+  border-left: 8px solid #df4545;
+  padding: 30px;
+  font-size: 25px;
+  color: #f28b8b;
+  display: flex;
+  align-items: center;
+}
+
+/* ---------------------------------------------------------
+   FOOTER
+--------------------------------------------------------- */
+
+.footer {
+  height: 70px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #050e17;
+  border-top: 2px solid #19384c;
+  display: flex;
+  align-items: center;
+  padding: 0 55px;
+  color: #718d9d;
+  font-size: 18px;
+}
+
+.source {
+  color: #55c6ed;
+}
+
+.updated {
+  margin-left: auto;
+}
+
+/* ---------------------------------------------------------
+   SMALL STATUS DOT
+--------------------------------------------------------- */
+
+.status-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  background: #45e487;
+  border-radius: 50%;
+  margin-right: 8px;
+  box-shadow: 0 0 8px rgba(69, 228, 135, 0.8);
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+  <div class="logo">
+    UKMTO
+  </div>
+
+  <div class="subtitle">
+    MARITIME SECURITY INCIDENTS
+  </div>
+
+  <div class="live">
+    <span class="status-dot"></span>
+    LIVE MONITOR
+  </div>
+
+</header>
+
+
+<section class="ticker">
+
+  <div class="ticker-label">
+    LATEST UKMTO UPDATES
+  </div>
+
+  <div class="ticker-window">
+    <div
+      class="ticker-track"
+      id="ticker"
+    >
+      <div class="ticker-item">
+        Connecting to live UKMTO feed...
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<main class="content">
+
+  <div class="section-title">
+    Latest Maritime Security Activity
+  </div>
+
+  <div
+    class="incident-grid"
+    id="incidents"
+  >
+    <div class="loading">
+      Loading latest incidents...
+    </div>
+  </div>
+
+</main>
+
+
+<footer class="footer">
+
+  <div>
+    SOURCE:
+    <span class="source">
+      UK MARITIME TRADE OPERATIONS
+    </span>
+  </div>
+
+  <div
+    class="updated"
+    id="updated"
+  >
+    Connecting to live feed...
+  </div>
+
+</footer>
+
+
+<script>
+const FEED_URL = "incidents.json";
+
+const REFRESH_INTERVAL = 300000; // 5 minutes
+
+
+function escapeHtml(value) {
+  if (value === null || value === undefined) {
+    return "";
+  }
+
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+
+function getIncidentClass(type) {
+
+  const value = String(type || "").toUpperCase();
+
+  if (value.includes("BOARD")) {
+    return "boarding";
+  }
+
+  if (value.includes("SUSPICIOUS")) {
+    return "suspicious";
+  }
+
+  if (value.includes("HIJACK")) {
+    return "hijack";
+  }
+
+  if (
+    value.includes("ATTACK") ||
+    value.includes("MISSILE") ||
+    value.includes("DRONE") ||
+    value.includes("UAV")
+  ) {
+    return "";
+  }
+
+  return "other";
+}
+
+
+function formatDateTime(incident) {
+
+  const date = incident.date || "DATE NOT AVAILABLE";
+  const time = incident.time || "";
+
+  if (time) {
+    return date + " • " + time;
+  }
+
+  return date;
+}
+
+
+function buildTickerItem(incident) {
+
+  const type = escapeHtml(
+    (incident.type || "MARITIME SECURITY").toUpperCase()
+  );
+
+  const number = escapeHtml(
+    incident.number || ""
+  );
+
+  const dateTime = escapeHtml(
+    formatDateTime(incident)
+  );
+
+  const location = escapeHtml(
+    incident.location || "LOCATION NOT SPECIFIED"
+  );
+
+  const vessel = escapeHtml(
+    incident.vessel || "VESSEL NOT NAMED"
+  );
+
+  return `
+    <div class="ticker-item">
+      <span class="ticker-type">${type}</span>
+      <span class="ticker-separator">•</span>
+      <span>${number}</span>
+      <span class="ticker-separator">•</span>
+      <span>${dateTime}</span>
+      <span class="ticker-separator">•</span>
+      <span class="ticker-vessel">${vessel}</span>
+      <span class="ticker-separator">•</span>
+      <span class="ticker-location">${location}</span>
+    </div>
+  `;
+}
+
+
+function buildIncidentCard(incident) {
+
+  const type = (
+    incident.type ||
+    "MARITIME SECURITY"
+  ).toUpperCase();
+
+  const warningNumber = escapeHtml(
+    incident.number || ""
+  );
+
+  const dateTime = escapeHtml(
+    formatDateTime(incident)
+  );
+
+  const vessel = escapeHtml(
+    incident.vessel ||
+    "VESSEL NOT NAMED"
+  );
+
+  const location = escapeHtml(
+    incident.location ||
+    "LOCATION NOT SPECIFIED"
+  );
+
+  const description = escapeHtml(
+    incident.description || ""
+  );
+
+  const className = getIncidentClass(type);
+
+  return `
+    <article class="incident ${className}">
+
+      <div class="card-top">
+
+        <div class="type">
+          ${escapeHtml(type)}
+        </div>
+
+        <div class="warning-number">
+          ${warningNumber}
+        </div>
+
+      </div>
+
+      <div class="datetime">
+        ${dateTime}
+      </div>
+
+      <div class="vessel-label">
+        Vessel
+      </div>
+
+      <div class="vessel">
+        ${vessel}
+      </div>
+
+      <div class="location-label">
+        Location
+      </div>
+
+      <div class="location">
+        ${location}
+      </div>
+
+      ${
+        description
+          ? `
+            <div class="description">
+              ${description}
+            </div>
+          `
+          : ""
+      }
+
+    </article>
+  `;
+}
+
+
+function updateTicker(incidents) {
+
+  const ticker = document.getElementById("ticker");
+
+  if (!incidents.length) {
+    ticker.innerHTML = `
+      <div class="ticker-item">
+        No current UKMTO incidents available.
+      </div>
+    `;
+    return;
+  }
+
+  /*
+   * Duplicate the ticker content so that the animation
+   * remains visually continuous on wide displays.
+   */
+  const content = incidents
+    .slice(0, 10)
+    .map(buildTickerItem)
+    .join("");
+
+  ticker.innerHTML = content + content;
+
+  /*
+   * Restart the animation after every data refresh.
+   */
+  ticker.style.animation = "none";
+
+  void ticker.offsetWidth;
+
+  ticker.style.animation =
+    "ticker-scroll 55s linear infinite";
+}
+
+
+function updateCards(incidents) {
+
+  const container =
+    document.getElementById("incidents");
+
+  const latest =
+    incidents.slice(0, 4);
+
+  if (!latest.length) {
+    container.innerHTML = `
+      <div class="error">
+        No UKMTO incident information is currently available.
+      </div>
+    `;
+    return;
+  }
+
+  /*
+   * If fewer than four incidents exist, the available
+   * incidents are still displayed without creating
+   * artificial information.
+   */
+  container.innerHTML =
+    latest
+      .map(buildIncidentCard)
+      .join("");
+}
+
+
+async function loadIncidents() {
+
+  const container =
+    document.getElementById("incidents");
+
+  try {
+
+    const response = await fetch(
+      FEED_URL + "?t=" + Date.now(),
+      {
+        cache: "no-store"
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Feed unavailable");
+    }
+
+    const incidents =
+      await response.json();
+
+    if (
+      !Array.isArray(incidents) ||
+      incidents.length === 0
+    ) {
+      throw new Error("No incidents available");
+    }
+
+    updateTicker(incidents);
+
+    updateCards(incidents);
+
+    document.getElementById("updated").textContent =
+      "LAST DATA UPDATE: " +
+      new Date().toLocaleTimeString(
+        [],
+        {
+          hour: "2-digit",
+          minute: "2-digit"
+        }
+      ) +
+      " • AUTO REFRESH: 5 MIN";
+
+  } catch (error) {
+
+    /*
+     * Don't destroy an already displayed set of incidents
+     * if a later refresh temporarily fails.
+     */
+    const hasCards =
+      container.querySelector(".incident");
+
+    if (!hasCards) {
+
+      container.innerHTML = `
+        <div class="error">
+          Unable to retrieve the live UKMTO incident feed.
+          The display will automatically retry.
+        </div>
+      `;
+    }
+
+    document.getElementById("updated").textContent =
+      "FEED CONNECTION ERROR • RETRYING";
+  }
+}
+
+
+loadIncidents();
+
+setInterval(
+  loadIncidents,
+  REFRESH_INTERVAL
+);
+</script>
+
+</body>
+</html>
