@@ -502,7 +502,7 @@ if incidents:
     )
 PY
 
-rm -rf ukmto_pdfs
+# rm -rf ukmto_pdfs
 rm -f ukmto_index.html ukmto_links.txt
 
 echo "UKMTO update complete."
