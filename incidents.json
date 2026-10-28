@@ -120,8 +120,8 @@
     "description": "UKMTO has received a report of an incident in the Strait of Hormuz UKMTO has received a verified report of a Bulk carrier being struck by an unknown projectile which has hit the hull. The crew are reported safe, no damage assessment has been reported and environmental impact is unknown at present."
   },
   {
-    "number": "UKMTO WARNING 111-26",
-    "warning_number": "111-26",
+    "number": "UKMTO WARNING 112-26",
+    "warning_number": "112-26",
     "date": "13 AUG 2026",
     "time": "1552 UTC",
     "type": "ATTACK",
@@ -130,8 +130,8 @@
     "description": "UKMTO has received a report of an incident in the Strait of Hormuz. UKMTO has received reports from Military Authorities that a tanker was struck by a Uncrewed Ariel Vehicle (UAV) whilst conducting an outbound transit of the Strait of Hormuz. The vessel was subject to minor damage, crew are reported as safe and accounted for and no environmental impact has been reported."
   },
   {
-    "number": "UKMTO WARNING 112-26",
-    "warning_number": "112-26",
+    "number": "UKMTO WARNING 111-26",
+    "warning_number": "111-26",
     "date": "13 AUG 2026",
     "time": "1552 UTC",
     "type": "ATTACK",
@@ -277,7 +277,7 @@
     "type": "ATTACK",
     "location": "LOCATION NOT SPECIFIED",
     "vessel": "VESSEL NOT NAMED",
-    "description": "UKMTO has received a report of an incident 9NM east of Oman. Military authorities have reported that a container ship has sustained damage to the rear of the vessel which has caused a fire onboard. UPDATE 001: UKMTO has been informed by military authorities and the CSO of the vessel that the crew have abandoned the vessel and are currently embarked in a lifeboat. UPDATE 002: UKMTO has spoken to the CSO of the container ship who confirms that the crew has been rescued by local authorities. Authorities continue to investigate."
+    "description": "UKMTO has received a report of an incident 9NM east of Oman. Military authorities have reported that a container ship has sustained damage to the rear of the vessel which has caused a fire onboard. UPDATE 001: UKMTO has been informed by military authorities and the CSO of the vessel that the crew have abandoned the vessel and are currently embarked in a lifeboat. Authorities continue to investigate."
   },
   {
     "number": "UKMTO WARNING 080-26",
