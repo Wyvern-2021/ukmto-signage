@@ -90,16 +90,6 @@
     "description": "UKMTO has received a report of an incident 4NM south of MAREEYO SOMALIA. The CSO of a cargo vessel reports being boarded by 8 armed unauthorised persons who have taken control of the vessel. Authorities are investigating."
   },
   {
-    "number": "UKMTO WARNING 117-26",
-    "warning_number": "117-26",
-    "date": "17 AUG 2026",
-    "time": "1100 UTC",
-    "type": "ATTACK",
-    "location": "LOCATION NOT SPECIFIED",
-    "vessel": "VESSEL NOT NAMED",
-    "description": "UKMTO has received a report of an incident 40NM southeast of Al Mukha, Yemen. Local Authorities report a cargo ship being struck by multiple unknown projectiles. The cargo vessel was unmanned at the time of the incident; however, the damage has resulted in a complete constructive loss. Authorities are investigating."
-  },
-  {
     "number": "UKMTO WARNING 116-26",
     "warning_number": "116-26",
     "date": "15 AUG 2026",
@@ -120,8 +110,8 @@
     "description": "UKMTO has received a report of an incident in the Strait of Hormuz UKMTO has received a verified report of a Bulk carrier being struck by an unknown projectile which has hit the hull. The crew are reported safe, no damage assessment has been reported and environmental impact is unknown at present."
   },
   {
-    "number": "UKMTO WARNING 111-26",
-    "warning_number": "111-26",
+    "number": "UKMTO WARNING 112-26",
+    "warning_number": "112-26",
     "date": "13 AUG 2026",
     "time": "1552 UTC",
     "type": "ATTACK",
@@ -130,8 +120,8 @@
     "description": "UKMTO has received a report of an incident in the Strait of Hormuz. UKMTO has received reports from Military Authorities that a tanker was struck by a Uncrewed Ariel Vehicle (UAV) whilst conducting an outbound transit of the Strait of Hormuz. The vessel was subject to minor damage, crew are reported as safe and accounted for and no environmental impact has been reported."
   },
   {
-    "number": "UKMTO WARNING 112-26",
-    "warning_number": "112-26",
+    "number": "UKMTO WARNING 111-26",
+    "warning_number": "111-26",
     "date": "13 AUG 2026",
     "time": "1552 UTC",
     "type": "ATTACK",
@@ -277,7 +267,7 @@
     "type": "ATTACK",
     "location": "LOCATION NOT SPECIFIED",
     "vessel": "VESSEL NOT NAMED",
-    "description": "UKMTO has received a report of an incident 9NM east of Oman. Military authorities have reported that a container ship has sustained damage to the rear of the vessel which has caused a fire onboard. UPDATE 001: UKMTO has been informed by military authorities and the CSO of the vessel that the crew have abandoned the vessel and are currently embarked in a lifeboat. UPDATE 002: UKMTO has spoken to the CSO of the container ship who confirms that the crew has been rescued by local authorities. Authorities continue to investigate."
+    "description": "UKMTO has received a report of an incident 9NM east of Oman. Military authorities have reported that a container ship has sustained damage to the rear of the vessel which has caused a fire onboard. UPDATE 001: UKMTO has been informed by military authorities and the CSO of the vessel that the crew have abandoned the vessel and are currently embarked in a lifeboat. Authorities continue to investigate."
   },
   {
     "number": "UKMTO WARNING 080-26",
@@ -298,5 +288,15 @@
     "location": "LOCATION NOT SPECIFIED",
     "vessel": "VESSEL NOT NAMED",
     "description": "UKMTO has received a report of an incident 30NM southwest of Al Hudaydah, Yemen. A cargo vessel has triggered a distress alert stating that they are under attack by unknown armed assailants. Authorities are investigating."
+  },
+  {
+    "number": "UKMTO WARNING 077-26",
+    "warning_number": "077-26",
+    "date": "01 JUL 2026",
+    "time": "0715 UTC",
+    "type": "SUSPICIOUS ACTIVITY",
+    "location": "LOCATION NOT SPECIFIED",
+    "vessel": "VESSEL NOT NAMED",
+    "description": "UKMTO has received a report of an incident 76NM south of BALHAF, YEMEN. UPDATE 001 – UKMTO have been informed that the suspicious small craft has now departed from the vessel but remains active in the area and could possibly be a risk to other vessels. CSO reports the vessel has minor damage on the bridge and confirms it’s one suspicious small craft with 4 POB, armed with RPG. UPDATE 002 – UKMTO Warning 077_26 has been reclassified as an ILLEGAL BOARDING. The Master has further reported that the unauthorised personnel caused damage to the bridge and several adjacent compartments. The crew remain secure in the citadel and are reported safe UKMTO are continuing to investigate."
   }
 ]
