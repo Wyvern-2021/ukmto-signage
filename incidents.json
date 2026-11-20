@@ -120,8 +120,8 @@
     "description": "UKMTO has received a report of an incident in the Strait of Hormuz UKMTO has received a verified report of a Bulk carrier being struck by an unknown projectile which has hit the hull. The crew are reported safe, no damage assessment has been reported and environmental impact is unknown at present."
   },
   {
-    "number": "UKMTO WARNING 112-26",
-    "warning_number": "112-26",
+    "number": "UKMTO WARNING 111-26",
+    "warning_number": "111-26",
     "date": "13 AUG 2026",
     "time": "1552 UTC",
     "type": "ATTACK",
@@ -130,8 +130,8 @@
     "description": "UKMTO has received a report of an incident in the Strait of Hormuz. UKMTO has received reports from Military Authorities that a tanker was struck by a Uncrewed Ariel Vehicle (UAV) whilst conducting an outbound transit of the Strait of Hormuz. The vessel was subject to minor damage, crew are reported as safe and accounted for and no environmental impact has been reported."
   },
   {
-    "number": "UKMTO WARNING 111-26",
-    "warning_number": "111-26",
+    "number": "UKMTO WARNING 112-26",
+    "warning_number": "112-26",
     "date": "13 AUG 2026",
     "time": "1552 UTC",
     "type": "ATTACK",
